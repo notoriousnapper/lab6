@@ -27,7 +27,30 @@ function addProjectDetails(e) {
 	var idNumber = projectID.substr('project'.length);
 
 	console.log("User clicked on project " + idNumber);
+
+	var url="/project/" +idNumber;
+	console.log("Requested url is "+url);
+	
+	// Main Line
+	$.get(url,emptyCallback);
 }
+
+
+function emptyCallback(result){
+	console.log(result);
+	// Returns the html file, which has a list of elements
+	//var projectHTML = 
+
+	var projectHTML = '<a href="#" class="thumbnail">' + 
+	    '<img src="' + result['image'] + '"class="detailsImage">' +
+	    '<p>' + result['title'] + '</p>' +
+	    '<p><small>' + result['date'] + '</small></p>' +
+	    '<p>' + result['summary'] + '</p></a>';
+
+	$("#project"+result['id']).find(".details").html(projectHTML);
+	console.log("done");
+}
+
 
 /*
  * Make an AJAX call to retrieve a color palette for the site
